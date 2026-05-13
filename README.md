@@ -31,6 +31,7 @@ Open-source style monorepo for a **knowledge transition (KT) automation** protot
 | [`docs/technical-design.md`](docs/technical-design.md) | Architecture, data model, auth/JWT, AI/RAG pipeline, API surface |
 | [`setup_guide.md`](setup_guide.md) | Detailed local and Docker setup, env loading order, troubleshooting |
 | [`docs/publish-checklist.md`](docs/publish-checklist.md) | Security/CORS/JWT/RBAC review summary and pre-publish checks |
+| [`docs/repository-access-policy.md`](docs/repository-access-policy.md) | **Who can change `main`:** GitHub settings + optional `CODEOWNERS` (enforce in repo Settings, not via files alone) |
 | [`scripts/push_github_pat.sh`](scripts/push_github_pat.sh) | Optional: push with a PAT file (gitignored **`.github_pat`**); use **`--force`** after a history rewrite |
 | [`docs/deliverables.md`](docs/deliverables.md) | Submission-style checklist |
 

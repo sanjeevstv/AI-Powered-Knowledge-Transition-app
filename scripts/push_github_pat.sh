@@ -9,11 +9,11 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
-FORCE=()
+FORCE=0
 PAT_FILE="$REPO_ROOT/.github_pat"
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    -f | --force) FORCE=(-f) ;;
+    -f | --force) FORCE=1 ;;
     *) PAT_FILE="$1" ;;
   esac
   shift
@@ -37,4 +37,8 @@ URL="https://oauth2:${PAT}@github.com/sanjeevstv/AI-Powered-Knowledge-Transition
 # Avoid writing token into .git/config; one-shot push (no -u to URL with credentials).
 set +o history 2>/dev/null || true
 export GIT_TERMINAL_PROMPT=0
-git push "${FORCE[@]}" "$URL" "$BR"
+if [[ "$FORCE" -eq 1 ]]; then
+  git push -f "$URL" "$BR"
+else
+  git push "$URL" "$BR"
+fi
