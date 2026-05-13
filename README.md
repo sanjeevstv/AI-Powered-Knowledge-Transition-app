@@ -20,7 +20,6 @@ Open-source style monorepo for a **knowledge transition (KT) automation** protot
 
 ![KT app walkthrough](docs/kt-app-demo.gif)
 
-*(~2 MB GIF; regenerate from a screen recording with `python scripts/mov_to_readme_gif.py <input.mov> docs/kt-app-demo.gif` — keep source `.mov` files out of git; see `.gitignore`.)*
 
 ---
 
@@ -31,10 +30,6 @@ Open-source style monorepo for a **knowledge transition (KT) automation** protot
 | [`docs/technical-design.md`](docs/technical-design.md) | Architecture, data model, auth/JWT, AI/RAG pipeline, API surface |
 | [`setup_guide.md`](setup_guide.md) | Detailed local and Docker setup, env loading order, troubleshooting |
 | [`docs/publish-checklist.md`](docs/publish-checklist.md) | Security/CORS/JWT/RBAC review summary and pre-publish checks |
-| [`docs/branch-rules.md`](docs/branch-rules.md) | **Branch protection / rulesets** — simple setup aligned with sibling repos + optional CI requirement |
-| [`docs/repository-access-policy.md`](docs/repository-access-policy.md) | **Who can change `main`:** GitHub settings + optional `CODEOWNERS` (enforce in repo Settings, not via files alone) |
-| [`scripts/push_github_pat.sh`](scripts/push_github_pat.sh) | Optional: push with a PAT file (gitignored **`.github_pat`**); use **`--force`** after a history rewrite |
-| [`scripts/apply_github_branch_rulesets.sh`](scripts/apply_github_branch_rulesets.sh) | Optional: use the same **`.github_pat`** to apply **PR + code-owner rulesets** on every repo you own (see [`docs/branch-rules.md`](docs/branch-rules.md) § D) |
 | [`docs/deliverables.md`](docs/deliverables.md) | Submission-style checklist |
 
 ---
