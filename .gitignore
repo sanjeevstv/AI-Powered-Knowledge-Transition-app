@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.Python
+
+# Env and secrets (root + explicit app paths)
+.env
+.env.local
+.env.*.local
+apps/api/.env
+apps/web/.env.local
+
+# Local GitHub PAT for scripts/push_github_pat.sh (never commit)
+.github_pat
+
+# Large screen recordings (keep GIFs under docs/ instead)
+*.mov
+
+# Runtime uploads / local API artifacts
+apps/api/uploads/
+
+# Build / cache
+.next/
+out/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Data / local persistence
+*.sqlite3
+*.db
+chroma_data/
+
+# IDE / OS
+.DS_Store
+.idea/
+*.swp
+
+# Logs
+npm-debug.log*
+*.log

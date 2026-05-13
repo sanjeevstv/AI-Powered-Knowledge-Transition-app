@@ -1,0 +1,16 @@
+[
+  {
+    "external_id": "KT-101",
+    "topic": "Deployment Process",
+    "sme_email": "sme@example.com",
+    "scheduled_date": "2026-05-01",
+    "status": "completed"
+  },
+  {
+    "external_id": "KT-102",
+    "topic": "Incident Management",
+    "sme_email": "sme@example.com",
+    "scheduled_date": "2026-05-08",
+    "status": "pending"
+  }
+]

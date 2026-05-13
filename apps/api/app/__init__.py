@@ -1,0 +1,1 @@
+"""KT Platform FastAPI application."""

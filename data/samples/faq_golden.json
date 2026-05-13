@@ -1,0 +1,10 @@
+[
+  {
+    "question": "How do we deploy the application?",
+    "answer": "Use the Jenkins pipeline described in the deployment KT session."
+  },
+  {
+    "question": "Where are logs stored?",
+    "answer": "Production logs are monitored in Splunk dashboards."
+  }
+]

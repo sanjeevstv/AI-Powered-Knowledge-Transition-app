@@ -1,0 +1,5 @@
+The deployment pipeline uses Jenkins.
+Rollback requires approval from the release manager.
+Logs are monitored in Splunk.
+
+Vendor B should capture CI/CD stage gates and artifact promotion rules during the next session.
