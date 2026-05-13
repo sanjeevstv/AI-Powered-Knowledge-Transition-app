@@ -33,6 +33,19 @@ After the first workflow run appears under **Actions**, edit the ruleset (or cla
 
 **Settings** → **Branches** → **Add rule** for `main` — align with the same ideas: PR required, approvals, code owners, no force push.
 
+### D. Apply to every repo you own (API + PAT file)
+
+From the repo root, put a PAT on one line in **`.github_pat`** (gitignored), same as [`scripts/push_github_pat.sh`](../scripts/push_github_pat.sh). The token needs **repo** (classic) or fine-grained **Administration** + **Contents** on each repository.
+
+Then run:
+
+```bash
+./scripts/apply_github_branch_rulesets.sh
+# or: ./scripts/apply_github_branch_rulesets.sh /path/to/patfile
+```
+
+That lists **`/user/repos?affiliation=owner`**, ensures **`.github/CODEOWNERS`** includes `* @sanjeevstv`, and creates/updates a **branch ruleset** named `Protect main (require PR + code owner)` on the **default branch** (PR required, 1 approval, code-owner review, block deletion and force-push).
+
 ---
 
-Rules are **not enforced by this markdown file**; they are enforced only after you save them in **GitHub Settings** for this repository.
+For **manual** paths (A–C), nothing is enforced until you save in **GitHub Settings**. Path **D** applies the ruleset and `CODEOWNERS` commit **via the GitHub API** once the script succeeds.
