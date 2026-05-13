@@ -1,5 +1,7 @@
 # Repository access: only the owner may change `main`
 
+See also **[`docs/branch-rules.md`](branch-rules.md)** for a **simple branch ruleset + CI** pattern (similar in spirit to sibling repos like [AI-Hyper-Personalization-Engine-for-Retail-Banking](https://github.com/sanjeevstv/AI-Hyper-Personalization-Engine-for-Retail-Banking)).
+
 GitHub does **not** read a magic file that blocks pushes. You enforce this in **repository settings** (and optionally **organization** settings). Below is a practical setup for a personal repo owned by **`sanjeevstv`**.
 
 ## 1. Who can push at all?
