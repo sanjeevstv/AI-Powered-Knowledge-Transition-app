@@ -67,25 +67,25 @@ Missing or unmapped emails in `role_config.json` resolve to **vendor_team_member
 sequenceDiagram
     autonumber
     participant W as Next.js client
-    participant A as FastAPI /auth
+    participant A as FastAPI auth
     participant D as SQLite User table
     participant R as role_config.json
 
-    W->>A: POST /api/v1/auth/login {email, password}
+    W->>A: "POST /api/v1/auth/login body email, password"
     A->>D: SELECT user by email
     D-->>A: User + hashed_password
-    A->>A: verify_password / create_access_token(sub=email)
-    A-->>W: {access_token, token_type: bearer}
-    W->>W: store token (localStorage)
+    A->>A: "verify_password, create_access_token(sub=email)"
+    A-->>W: "access_token, token_type bearer"
+    W->>W: "store token (localStorage)"
 
-    W->>A: GET /api/v1/auth/me Authorization: Bearer JWT
-    A->>A: decode_token → email
+    W->>A: "GET /api/v1/auth/me Authorization Bearer JWT"
+    A->>A: decode_token to email
     A->>D: SELECT User by email
-    D-->>A: User (id, email, full_name, role)
-    A->>R: load_role_map() / get_config_role_raw(email)
+    D-->>A: "User id, email, full_name, role"
+    A->>R: "load_role_map, get_config_role_raw(email)"
     R-->>A: raw label or absent
-    A->>A: ui_access_for_email(email) → full|limited
-    A-->>W: MeResponse (role from DB, config_role, ui_access)
+    A->>A: "ui_access_for_email(email) to full or limited"
+    A-->>W: "MeResponse role from DB, config_role, ui_access"
 ```
 
 ---
@@ -98,28 +98,28 @@ Typical flow: **save transcript** (`PUT /sessions/{id}/transcript`), then **Run 
 sequenceDiagram
     autonumber
     participant W as Next.js
-    participant API as FastAPI /sessions
+    participant API as FastAPI sessions
     participant DB as SQLite
     participant LLM as llm.process_kt_transcript
     participant RAG as rag.index_session_content
     participant CH as Chroma kt_knowledge
 
-    W->>API: POST /api/v1/sessions/{id}/process-ai (Bearer)
-    API->>DB: load KTSession; fail if transcript empty
-    API->>LLM: process_kt_transcript(transcript)
+    W->>API: "POST /api/v1/sessions/:id/process-ai (Bearer)"
+    API->>DB: "load KTSession, fail if transcript empty"
+    API->>LLM: "process_kt_transcript(transcript)"
     alt OPENAI_API_KEY nonempty
-        LLM->>LLM: OpenAI chat.completions JSON object
-        LLM->>LLM: _parse_llm_json_object (strip fenced code if present)
+        LLM->>LLM: "OpenAI chat.completions JSON object"
+        LLM->>LLM: "_parse_llm_json_object (strip fenced code if present)"
     else no key
-        LLM->>LLM: _stub_process(keyword heuristics)
+        LLM->>LLM: "_stub_process(keyword heuristics)"
     end
-    LLM-->>API: dict summary, decisions, risks, actions, faqs, gaps
-    API->>DB: DELETE old ActionItem, FAQItem for session
-    API->>DB: UPDATE KTSession fields; INSERT new ActionItem, FAQItem
-    API->>RAG: index_session_content(session id, external_id, text...)
-    RAG->>RAG: chunk_text; embed_texts (OpenAI or pseudo)
-    RAG->>CH: collection.upsert(ids, documents, metadatas, embeddings)
-    API-->>W: ProcessAIResponse (counts, indexed_in_vector_store)
+    LLM-->>API: "dict summary, decisions, risks, actions, faqs, gaps"
+    API->>DB: "DELETE old ActionItem, FAQItem for session"
+    API->>DB: "UPDATE KTSession fields, INSERT new ActionItem, FAQItem"
+    API->>RAG: "index_session_content(session id, external_id, text...)"
+    RAG->>RAG: "chunk_text, embed_texts (OpenAI or pseudo)"
+    RAG->>CH: "collection.upsert(ids, documents, metadatas, embeddings)"
+    API-->>W: "ProcessAIResponse (counts, indexed_in_vector_store)"
 ```
 
 ---
